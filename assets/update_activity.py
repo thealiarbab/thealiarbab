@@ -82,7 +82,7 @@ def chart(cal, t):
         flat = c["h"] == c["l"]
         col = P["mute"] if flat else P["up"] if c["c"] >= c["o"] else P["dn"]
         a, b = sy(max(c["o"], c["c"])), sy(min(c["o"], c["c"]))
-        dl = .5 + i * .04
+        dl = .3 + i * .022
         live = ' class="live"' if i == len(cs) - 1 and b - a > 6 else ""
         o.append(f'<g class="g" style="animation-delay:{dl:.2f}s"><path d="M{n(x)} {n(sy(c["h"]))}V{n(sy(c["l"]))}" stroke="{col}" stroke-width="{t["wick"]}"/>'
                  f'<rect{live} x="{n(x - st * .32)}" y="{n(min(a, y1 - 2))}" width="{n(st * .64)}" height="{n(max(2, b - a))}" fill="{col}"/></g>')
@@ -94,7 +94,7 @@ def chart(cal, t):
             o.append(f'<g fill="{P["mute"]}">{text(t, MONTHS[m - 1], t["msize"], x, t["months_y"], "middle")}</g>')
         prev = m
     ly = sy(cs[-1]["c"])
-    o.append(f'<path class="f" style="animation-delay:2.6s" d="M{x0} {n(ly)}H{x1 + 4}" stroke="{P["up"]}" stroke-dasharray="3 4"/>'
+    o.append(f'<path class="f" style="animation-delay:1.5s" d="M{x0} {n(ly)}H{x1 + 4}" stroke="{P["up"]}" stroke-dasharray="3 4"/>'
              f'<g class="blink"><rect x="{x1 + 6}" y="{n(ly - fw * .24)}" width="{fw}" height="{n(fw * .48)}" rx="4" fill="{P["up"]}"/>'
              f'<g fill="{P["bg"]}">{text(t, "NOW", t["msize"], x1 + 6 + fw / 2, ly + t["msize"] * .35, "middle")}</g></g>')
     tx, ty, anchor = t["total"]
